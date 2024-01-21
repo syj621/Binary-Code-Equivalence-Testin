@@ -1,4 +1,4 @@
-int CWE789_Uncontrolled_Mem_Alloc__malloc_char_fscanf_01_bad()
+int bad()
 {
     size_t data;
     
@@ -24,18 +24,18 @@ int CWE789_Uncontrolled_Mem_Alloc__malloc_char_fscanf_01_bad()
         }
     }
 }
-static int goodG2B()
+static int goodB2G()
 {
     size_t data;
     
     data = 0;
     
-    data = 20;
+    fscanf(stdin, "%zu", &data);
     {
         char * myString;
         
         
-        if (data > strlen(HELLO_STRING))
+        if (data > strlen(HELLO_STRING) && data < 100)
         {
             myString = (char *)malloc(data*sizeof(char));
             if (myString == NULL) {exit(-1);}
@@ -46,7 +46,7 @@ static int goodG2B()
         }
         else
         {
-            printLine("Input is less than the length of the source string");
+            printLine("Input is less than the length of the source string or too large");
         }
     }
 }
@@ -56,7 +56,7 @@ int main()
 {
     int x;
     s2e_make_symbolic(&x, sizeof(x), "x");
-    int func0 = CWE789_Uncontrolled_Mem_Alloc__malloc_char_fscanf_01_bad(x);
+    int func0 = bad(x);
     int func1 = goodG2B(x);
     int func2 = goodB2G(x);
     void func3 = CWE789_Uncontrolled_Mem_Alloc__malloc_char_fscanf_01_good(x);

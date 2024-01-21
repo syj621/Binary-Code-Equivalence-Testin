@@ -25,7 +25,8 @@ Template File: sources-sinks-01.tmpl.c
 
 #ifndef OMITBAD
 
-int CWE789_Uncontrolled_Mem_Alloc__malloc_char_fscanf_01_bad()
+//int CWE789_Uncontrolled_Mem_Alloc__malloc_char_fscanf_01_bad()
+int bad()
 {
     size_t data;
     /* Initialize data */
