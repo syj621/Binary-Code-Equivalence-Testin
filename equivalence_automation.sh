@@ -26,11 +26,11 @@ for cwe_file in *CWE*.c; do
     generated_file="equivalencetest.${file_extension}"
 
     # Compile the generated file
-    gcc -o "$COMPILED_DIR/${base_name}_test" "$generated_file"
+    gcc -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c99 -o "${COMPILED_DIR}/${base_name}" "${base_name}.${file_extension}"
 
     # Check if compilation was successful
     if [ $? -eq 0 ]; then
-        # Create a new S2E project
+        # Create a new S2E porject
         s2e new_project "$COMPILED_DIR/${base_name}_test"
         cd $COMPILED_DIR
 
