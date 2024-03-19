@@ -26,8 +26,13 @@ for cwe_file in *CWE*.c; do
     generated_file="equivalencetest.${file_extension}"
 
     # Compile the generated file
-    gcc -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c99 -o "${COMPILED_DIR}/${base_name}" $generated_file
-
+    # Compile the generated file based on its extension
+    if [ "$file_extension" == "c" ]; then
+        gcc -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c99 -o "${COMPILED_DIR}/${base_name}" $generated_file
+    elif [ "$file_extension" == "cpp" ]; then
+        g++ -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c++11 -o "${COMPILED_DIR}/${base_name}" $generated_file
+    fi
+    
     # Check if compilation was successful
     if [ $? -eq 0 ]; then
         # Create a new S2E porject
