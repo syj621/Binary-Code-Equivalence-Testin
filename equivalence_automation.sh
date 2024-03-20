@@ -32,11 +32,10 @@ for cwe_file in *CWE*.c; do
     if [ $? -eq 0 ]; then
         # Create a new S2E porject
         s2e new_project "$COMPILED_DIR/${base_name}"
-        cd $COMPILED_DIR
-
-
-        # s2e run "$base_name"
-
+        cd "projects/$base_name"
+        s2e run $base_name
+        cd ../..
+        
         # Move the CWE file to the processed directory to indicate it has been handled
         mv "$cwe_file" "$PROCESSED_DIR/"
 
