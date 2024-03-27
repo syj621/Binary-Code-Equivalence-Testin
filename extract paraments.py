@@ -121,17 +121,18 @@ for k in functions_name_list:
     starts_with_good(k)
 good_function
 
-
 # In[248]:
 
 
 import random
+
 
 def random_choice(my_array):
     if my_array:
         return random.choice(my_array)
     else:
         return None
+
 
 selected_element = random_choice(good_function)
 
@@ -141,15 +142,13 @@ selected_element = random_choice(good_function)
 
 def contains_bad(input_str):
     return "_bad" in input_str
-bad_one=None
-good_one=None
-void=0
 
+
+bad_one = None
+good_one = None
+void = 0
 
 # In[250]:
-
-
-
 
 
 for return_type, function_name, function_para in functions:
@@ -161,55 +160,47 @@ for return_type, function_name, function_para in functions:
     function_body = find_function_body(return_type, function_name, functions_lines)
     print(function_body)
 
-    
-    if contains_bad(function_name) or function_name=='bad':
+    if contains_bad(function_name) or function_name == 'bad':
 
-        bad_body=function_body
-        bad_name=function_name
-        if return_type.lower()=='void':
-            void=1
+        bad_body = function_body
+        bad_name = function_name
+        if return_type.lower() == 'void':
+            void = 1
             continue;
-    if selected_element.lower()==function_name.lower():
-        good_body=function_body
-        good_name=function_name
-        if return_type.lower()=='void':
-            void=1
+    if selected_element.lower() == function_name.lower():
+        good_body = function_body
+        good_name = function_name
+        if return_type.lower() == 'void':
+            void = 1
             continue;
-
-
 
 # In[251]:
 
 
 bad_one
 
-
 # In[252]:
 
 
 good_one
 
-
 # In[253]:
 
 
-#accessing the return type
+# accessing the return type
 if void == 0:
     func_num = 0
 first_function_return_type = functions[0][0]
-#checking the file type that needs to be created
+# checking the file type that needs to be created
 file_extension = 'cpp' if 'cpp' in file.name else 'c'
 output_file_name = f"equivalencetest.{file_extension}"
-
 
 with open(output_file_name, 'w') as output_file:
     pass
 
 if void == 0:
 
-
-
-    #writing the main
+    # writing the main
     with open(output_file_name, 'w') as output_file:
         headers = ["#include <inttypes.h>\n", "#include <s2e/s2e.h>\n"]
         for include in includes:
@@ -222,14 +213,12 @@ if void == 0:
         for k in good_body:
             output_file.write(k + '\n')
 
-
         output_file.write("\n")
         output_file.write("\nint main()\n{\n")
         output_file.write("    " + str(first_function_return_type) + " x;\n")
         output_file.write("    s2e_make_symbolic(&x, sizeof(x), \"x\");\n")
         call_str_bad = f"    {return_type} func1 = {bad_name}(x);\n"
         output_file.write(call_str_bad)
-
 
         call_str_good = f"    {return_type} func2 = {good_name}(x);\n"
         output_file.write(call_str_good)
@@ -258,7 +247,6 @@ if void == 0:
     print("success write")
 else:
     print('the return type error')
-
 
 # In[253]:
 
