@@ -19,7 +19,7 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
     echo "Processing $cwe_file..."
 
     # Call your Python script with the current file as an argument
-    python extract_paraments.py "$cwe_file"
+    python extract paraments.py "$cwe_file"
 
     # Assuming the python script generates a file named equivalencetest.c or equivalencetest.cpp
     # Adjust the path according to where you expect the generated file to be
