@@ -21,7 +21,7 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
     echo "Processing $cwe_file..."
 
     # Call your Python script with the current file as an argument
-    python3 extract_paraments.py "$cwe_file"
+    sudo python3 extract_paraments.py "$cwe_file"
 
     # Assuming the python script generates a file named equivalencetest.c or equivalencetest.cpp
     generated_file="${COMPILED_DIR}/equivalencetest.$file_extension"
@@ -44,8 +44,8 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
 
         # Define the path to the s2e-config.lua file
         CONFIG_FILE="$PROJECT_DIR/s2e-config.lua"
-        sed -i "/kleeArgs = {/a \ \ \ \ --Switch states only when the current one terminates\n    \"--use-dfs-search\"" "$CONFIG_FILE"
-        sed -i "/plugins = {/a \ \ \ \ -- Enable S2E custom opcodes\n    \"BaseInstructions\",\n\n    -- Basic tracing required for test case generation\n    \"ExecutionTracer\",\n\n    -- Enable the test case generator plugin\n    \"TestCaseGenerator\"," "$CONFIG_FILE"
+        sudo sed -i "/kleeArgs = {/a \ \ \ \ --Switch states only when the current one terminates\n    \"--use-dfs-search\"" "$CONFIG_FILE"
+        sudo sed -i "/plugins = {/a \ \ \ \ -- Enable S2E custom opcodes\n    \"BaseInstructions\",\n\n    -- Basic tracing required for test case generation\n    \"ExecutionTracer\",\n\n    -- Enable the test case generator plugin\n    \"TestCaseGenerator\"," "$CONFIG_FILE"
 
         # Change to the project directory and run s2e
         cd "$PROJECT_DIR"
