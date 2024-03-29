@@ -28,11 +28,12 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
 
     # Compile the generated file based on its extension
     if [ "$file_extension" == "c" ]; then
-        gcc -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c99 -o "${COMPILED_DIR}/${base_name}" "$generated_file"
+        gcc -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c99 -o "${base_name}" "$generated_file"
     elif [ "$file_extension" == "cpp" ]; then
-        g++ -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c++11 -o "${COMPILED_DIR}/${base_name}" "$generated_file"
+        g++ -I /home/victortangton/s2e_new/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c++11 -o "${base_name}" "$generated_file"
     fi
-
+    mv $base_name COMPILED_DIR
+    
     # Check if compilation was successful
     if [ $? -eq 0 ]; then
         PROJECT_DIR="$CURRENT_DIR/projects/$base_name"
