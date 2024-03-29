@@ -24,7 +24,7 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
     sudo python3 extract_paraments.py "$cwe_file"
 
     # Assuming the python script generates a file named equivalencetest.c or equivalencetest.cpp
-    generated_file="${COMPILED_DIR}/equivalencetest.$file_extension"
+    generated_file="equivalencetest.$file_extension"
 
     # Compile the generated file based on its extension
     if [ "$file_extension" == "c" ]; then
