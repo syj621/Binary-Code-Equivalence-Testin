@@ -56,9 +56,8 @@ def find_called_functions(function_body):
 
 # In[244]:
 
-
 def extract_includes(file_content):
-    include_pattern = r'^\s*#\s*include\s*["<][^">]+[">]'
+    include_pattern = r'^\s*#\s*include\s*<[^>]+>'
     includes = re.findall(include_pattern, file_content, re.MULTILINE)
     return includes
 
