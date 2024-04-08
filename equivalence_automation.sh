@@ -26,11 +26,14 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
     # Assuming the python script generates a file named equivalencetest.c or equivalencetest.cpp
     generated_file="equivalencetest.$file_extension"
 
+
     # Compile the generated file based on its extension
+    gcc -I /path/to/juliet/headers -I /path/to/s2e/headers my_test_case.c -o /path/to/compiled/output/my_test_case
+
     if [ "$file_extension" == "c" ]; then
-        gcc -I /home/chotepong/s2e/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c99 -o "${base_name}" "$generated_file"
+        gcc -I /home/chotepong/s2e/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -I /home/chotepong/s2e/test_cases -std=c99 -o "${base_name}" "$generated_file"
     elif [ "$file_extension" == "cpp" ]; then
-        g++ -I /home/chotepong/s2e/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -std=c++11 -o "${base_name}" "$generated_file"
+        g++ -I /home/chotepong/s2e/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -I /home/chotepong/s2e/test_cases -std=c++11 -o "${base_name}" "$generated_file"
     fi
     mv $base_name COMPILED_DIR
     
