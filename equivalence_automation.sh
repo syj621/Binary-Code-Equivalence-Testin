@@ -34,7 +34,7 @@ for cwe_file in "$TEST_DIR"/*CWE*.{c,cpp}; do
     elif [ "$file_extension" == "cpp" ]; then
         g++ -I /home/chotepong/s2e/images/ubuntu-22.04-x86_64/guestfs/home/s2e/include -I /home/chotepong/s2e/test_cases -std=c++11 -o "${base_name}" "$generated_file"
     fi
-    mv $base_name COMPILED_DIR
+    mv "$base_name" "$COMPILED_DIR/"
     
     # Check if compilation was successful
     if [ $? -eq 0 ]; then
